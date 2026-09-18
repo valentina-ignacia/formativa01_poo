@@ -6,8 +6,11 @@ public class EmpleadoAsalariado extends Empleado {
     private double sueldoMensual;
 
     /*Constructor Parámetros */
-    public EmpleadoAsalariado(String nombre, String idEmpleado, String telefono, boolean activo, double salarioBase, double sueldoMensual) {
-        super(nombre, idEmpleado, telefono, activo, salarioBase);
+    public EmpleadoAsalariado(String nombre, String idEmpleado, String telefono,
+                              boolean activo, double sueldoMensual) {
+
+        super(nombre, idEmpleado, telefono, activo, sueldoMensual);
+
         this.sueldoMensual = sueldoMensual;
     }
 

@@ -10,7 +10,7 @@ public abstract class Empleado {
     protected double salarioBase;
 
     /* Constructor Vacío */
-    public Empleado() {}
+    public Empleado(String nombre, String idEmpleado, String telefono, boolean activo) {}
 
     /* Constructos Parámetros */
     public Empleado(String nombre, String idEmpleado, String telefono, boolean activo, double salarioBase) {
