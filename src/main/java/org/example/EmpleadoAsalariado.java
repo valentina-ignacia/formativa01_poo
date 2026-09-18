@@ -16,8 +16,14 @@ public class EmpleadoAsalariado extends Empleado {
         return sueldoMensual;}
 
     public void setSueldoMensual(double sueldoMensual) {
-        this.sueldoMensual = sueldoMensual;}
+        if (sueldoMensual > 0) {
+            this.sueldoMensual = sueldoMensual;
+        } else {
+            System.out.println("¡El sueldo mensual no debe ser menor o igual a cero!");
+        }
+    }
 
+    /* Métodos Heredados */
     @Override
     public double calcularSalario() {
         return getSueldoMensual();
@@ -25,5 +31,11 @@ public class EmpleadoAsalariado extends Empleado {
 
     @Override
     public String obtenerRol() {
-        return "Asalariado";}
+        return "Asalariado";
+    }
+
+    @Override
+    public String mostrarInfo() {
+        return super.mostrarInfo() + " | Sueldo mensual: $" +sueldoMensual;
+    }
 }

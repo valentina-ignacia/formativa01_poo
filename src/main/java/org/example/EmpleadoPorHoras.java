@@ -8,7 +8,7 @@ public class EmpleadoPorHoras extends Empleado{
 
     /* Constructor Parámetros */
     public EmpleadoPorHoras(String nombre, String idEmpleado, String telefono, boolean activo, double salarioBase, int horasTrabajadas, double valorHora) {
-        super(nombre, idEmpleado, telefono, activo, salarioBase);
+        super(nombre, idEmpleado, telefono, activo, 0);
         this.horasTrabajadas = horasTrabajadas;
         this.valorHora = valorHora;
     }
@@ -18,14 +18,25 @@ public class EmpleadoPorHoras extends Empleado{
         return horasTrabajadas;}
 
     public void setHorasTrabajadas(int horasTrabajadas) {
-        this.horasTrabajadas = horasTrabajadas;}
+        if (horasTrabajadas > 0) {
+            this.horasTrabajadas = horasTrabajadas;
+        } else {
+            System.out.println("¡Las horas trabajadas no deben ser menor o igual a cero!");
+        }
+    }
 
     public double getValorHora() {
         return valorHora;}
 
     public void setValorHora(double valorHora) {
-        this.valorHora = valorHora;}
+        if (valorHora > 0) {
+            this.valorHora = valorHora;
+        } else {
+            System.out.println("¡El valor de las horas no deben ser menor o igual a cero!");
+        }
+    }
 
+    /* Métodos Heredados */
     @Override
     public double calcularSalario() {
         return horasTrabajadas * valorHora;
@@ -37,6 +48,6 @@ public class EmpleadoPorHoras extends Empleado{
 
     @Override
     public String mostrarInfo() {
-        return super.mostrarInfo() + " | Horas: "+getHorasTrabajadas()+" | Valor por hora: "+getValorHora();
+        return super.mostrarInfo() + " | Horas: "+ horasTrabajadas+" | Valor por hora: "+valorHora;
     }
 }

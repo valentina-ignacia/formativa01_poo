@@ -5,24 +5,20 @@ public class Gerente extends EmpleadoAsalariado implements Bonificable{
     /* Atributos */
     private String departamento;
     private double bonificacionAnual;
-    private double avanceBonificacion;
     private double metaDesempeno;
+    private double avanceMeta;
 
     /* Constructor Parámetros */
     public Gerente(String nombre, String idEmpleado, String telefono, boolean activo, double salarioBase, double sueldoMensual, String departamento, double bonificacionAnual,  double avanceBonificacion, double metaDesempeno) {
         super(nombre, idEmpleado, telefono, activo, salarioBase, sueldoMensual);
         this.departamento = departamento;
-        this.bonificacionAnual = bonificacionAnual;
-        this.avanceBonificacion = avanceBonificacion;
-        this.metaDesempeno = 0;
+        this.bonificacionAnual = 0;
+        this.metaDesempeno = metaDesempeno;
     }
 
     /* Getters n Setters */
     public String getDepartamento() {
         return departamento;}
-
-    public void setDepartamento(String departamento) {
-        this.departamento = departamento;}
 
     public double getBonificacionAnual() {
         return bonificacionAnual;}
@@ -30,27 +26,37 @@ public class Gerente extends EmpleadoAsalariado implements Bonificable{
     public void setBonificacionAnual(double bonificacionAnual) {
         this.bonificacionAnual = bonificacionAnual;}
 
-    public double getAvanceBonificacion() {
-        return avanceBonificacion;}
+    public double getAvanceMeta() {
+        return avanceMeta;
+    }
 
-    public void setAvanceBonificacion(double avanceBonificacion) {
-        this.avanceBonificacion = avanceBonificacion;}
+    public void setAvanceMeta(double avanceMeta) {
+        if (avanceMeta > 0) {
+            this.metaDesempeno = avanceMeta;
+        } else {
+            System.out.println("El avance de la meta no puede ser menor o igual a cero");
+        }
+    }
 
     /* Interfaz */
     @Override
     public void asignarMeta(double meta) {
-        double metaDesempeno = meta;
+        if (meta > 0) {
+            this.metaDesempeno = meta;
+        } else {
+            System.out.println("La meta no puede ser menor o igual a cero.");
+        }
     }
 
     @Override
     public double calcularBonificacion() {
-        double bonificacion;
-        if (avanceBonificacion >= metaDesempeno) {
-            bonificacion = getSueldoMensual() * 0.2;
+        if (metaDesempeno >= avanceMeta) {
+            bonificacionAnual = getSueldoMensual() * 0.20;
         } else {
-            bonificacion = 0;
+            bonificacionAnual = 0;
         }
-        return bonificacion;
+
+        return bonificacionAnual;
     }
 
     /* Métodos Abstractos */
@@ -62,6 +68,11 @@ public class Gerente extends EmpleadoAsalariado implements Bonificable{
     @Override
     public String obtenerRol() {
         return "Gerente";
+    }
+
+    @Override
+    public String mostrarInfo() {
+        return super.mostrarInfo() + " | Departamento: " + departamento + " | Meta: " +metaDesempeno+ " | Bonificación: $" + calcularBonificacion();
     }
 
     /* Método adicional */
